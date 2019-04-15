@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>humans</title>
+	<link rel="stylesheet" href="">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+	{% block content %}
+	<table border="1" cellpadding="5px">
+		<tr style="background: red; color: white;">
+			<td>Код дополнительной станции</td>
+			<td>Код маршрута</td>
+			<td>Время прибытия</td>
+			<td>Время стоянки</td>
+			<td>Код станции</td>
+			<td>Изменить</td>
+		</tr>
+		<tr>
+			<td>{{object.pk}}</td>
+			<td>{{object.code_of_route}}</td>
+			<td>{{object.time_of_arrive}}</td>
+			<td>{{object.time_of_stop}}</td>
+			<td>{{object.code_of_station}}</td>
+		</tr>
+	</table>
+	<a href="{% url 'updates_station' object.pk %}" class="btn btn-primary">Редактировать</a>
+	<a href="{% url 'deletes_station' object.pk %}" class="btn btn-primary">Удалить</a>
+	{% endblock %}
+</body>
+</html>

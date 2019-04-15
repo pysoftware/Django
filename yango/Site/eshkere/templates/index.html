@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>humans</title>
+	<link rel="stylesheet" href="">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+	<a href="{% url 'newcity'%}" class="btn btn-success">Новый город</a>
+	<a href="{% url 'newstation'%}" class="btn btn-success">Новая станция</a>
+	<a href="{% url 'newroute'%}" class="btn btn-success">Новый маршрут</a>
+	<a href="{% url 'newtrain'%}" class="btn btn-success">Новый поезд</a>
+	<a href="{% url 'newcrew'%}" class="btn btn-success">Новый экипаж</a>
+	<a href="{% url 'newstaff'%}" class="btn btn-success">Новый сотрудник</a>
+	<a href="{% url 'newposition'%}" class="btn btn-success">Новая должность</a>
+	<a href="{% url 'news_station'%}" class="btn btn-success">Новая доп. станция</a>
+	<h1>Города</h1>
+	{% block content %}
+	<table border="1" cellpadding="5px">
+		<tr style="background: red; color: white;">
+			<td>Код города</td>
+			<td>Название города</td>
+			<td>Изменить</td>
+		</tr>
+		{% for a in all_cities %}
+		<tr>
+			<td>{{a.pk}}</td>
+			<td>{{a.name_of_city}}</td>
+			<td><a href="{% url 'city' a.pk %}" class="btn btn-outline-warning">CHANGE</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+	<h1>Станции</h1>
+	<table border="1" cellpadding="5px">
+		<tr style="background: red; color: white;">
+			<td>Код станции</td>
+			<td>Название станции</td>
+			<td>Код города</td>
+			<td>Изменить</td>
+		</tr>
+		{% for a in all_stations %}
+		<tr>
+			<td>{{a.pk}}</td>
+			<td>{{a.name_of_station}}</td>
+			<td>{{a.code_of_city}}</td>
+			<td><a href="{% url 'station' a.pk %}" class="btn btn-outline-warning">CHANGE</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+	<h1>Маршруты</h1>
+	<table border="1" cellpadding="5px">
+		<tr style="background: red; color: white;">
+			<td>Код маршрута</td>
+			<td>Номер поезда</td>
+			<td>ДВ Отправления</td>
+			<td>ДВ Прибытия</td>
+			<td>Пункт отправления</td>
+			<td>Пункт прибытия</td>
+			<td>Изменить</td>
+		</tr>
+		{% for a in all_routes %}
+		<tr>
+			<td>{{a.pk}}</td>
+			<td>{{a.number_of_train}}</td>
+			<td>{{a.d_departure}}</td>
+			<td>{{a.d_arrival}}</td>
+			<td>{{a.point_of_departure}}</td>
+			<td>{{a.point_of_arrival}}</td>
+			<td><a href="{% url 'route' a.pk %}" class="btn btn-outline-warning">CHANGE</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+	<h1>Поезда</h1>
+	<table border="1" cellpadding="5px">
+		<tr style="background: red; color: white;">
+			<td>Номер поезда</td>
+			<td>Тип поезда</td>
+			<td>Изменить</td>
+		</tr>
+		{% for a in all_trains %}
+		<tr>
+			<td>{{a.pk}}</td>
+			<td>{{a.type_of_train}}</td>
+			<td><a href="{% url 'train' a.pk %}" class="btn btn-outline-warning">CHANGE</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+	<h1>Должности</h1>
+	<table border="1" cellpadding="5px">
+		<tr style="background: red; color: white;">
+			<td>Код должности</td>
+			<td>Название должности</td>
+			<td>Изменить</td>
+		</tr>
+		{% for a in all_positions %}
+		<tr>
+			<td>{{a.pk}}</td>
+			<td>{{a.name_of_position}}</td>
+			<td><a href="{% url 'position' a.pk %}" class="btn btn-outline-warning">CHANGE</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+	<h1>Дополнительные станции</h1>
+	<table border="1" cellpadding="5px">
+		<tr style="background: red; color: white;">
+			<td>Код дополнительной станции</td>
+			<td>Код маршрута</td>
+			<td>Время прибытия</td>
+			<td>Время стоянки</td>
+			<td>Код станции</td>
+			<td>Изменить</td>
+		</tr>
+		{% for a in all_s_stations %}
+		<tr>
+			<td>{{a.pk}}</td>
+			<td>{{a.code_of_route}}</td>
+			<td>{{a.time_of_arrive}}</td>
+			<td>{{a.time_of_stop}}</td>
+			<td>{{a.code_of_station}}</td>
+			<td><a href="{% url 's_station' a.pk %}" class="btn btn-outline-warning">CHANGE</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+	<h1>Экипаж</h1>
+	<table border="1" cellpadding="5px">
+		<tr style="background: red; color: white;">
+			<td>Код экипажа</td>
+			<td>Номер поезда</td>
+			<td>Номер вагона</td>
+			<td>ФИО сотрудника</td>
+			<td>Изменить</td>
+		</tr>
+		{% for a in  all_crews %}
+		<tr>
+			<td>{{a.pk}}</td>
+			<td>{{a.number_of_train}}</td>
+			<td>{{a.number_of_rcar}}</td>
+			<td>{{a.code_of_staff}}</td>
+			<td><a href="{% url 'crew' a.pk %}" class="btn btn-outline-warning">CHANGE</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+	<h1>Сотрудники</h1>
+	<table border="1" cellpadding="5px">
+		<tr style="background: red; color: white;">
+			<td>Код сотрудника</td>
+			<td>ФИО сотрудника</td>
+			<td>Д.Р. сотрудника</td>
+			<td>Паспортные данные</td>
+			<td>Код должности</td>
+			<td>Особые приметы</td>
+			<td>Данные медосмотра</td>
+			<td>Изменить</td>
+		</tr>
+		{% for a in  all_staff %}
+		<tr>
+			<td>{{a.pk}}</td>
+			<td>{{a.name}}</td>
+			<td>{{a.birthdate_of_staff}}</td>
+			<td>{{a.code_of_passport}}</td>
+			<td>{{a.code_of_position}}</td>
+			<td>{{a.special_sign}}</td>
+			<td>{{a.m_e_data}}</td>
+			<td><a href="{% url 'staff' a.pk %}" class="btn btn-outline-warning">CHANGE</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% endblock %}
+</body>
+</html>
